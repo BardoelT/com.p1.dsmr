@@ -15,7 +15,7 @@ class MyDevice extends Homey.Device {
 	}
 
 	timerElapsed(device) {
-		setTimeout(function () { device.timerElapsed(device); }, device.getSetting('interval') * 1000);
+		device.timerID = setTimeout(function () { device.timerElapsed(device); }, device.getSetting('interval') * 1000);
 		var energy = {
 			"list": [
 				{ "device": "measure_power", "factor": 1000, "dsmr": ["power_delivered_l1", "power_delivered_l2", "power_delivered_l3"] },
@@ -33,10 +33,10 @@ class MyDevice extends Homey.Device {
 						lookup['dsmr'].forEach(search => {
 							if (search === element['name']) {
 								add += (element['value'] * lookup['factor']);
-								device.setCapabilityValue(lookup['device'], add);
 							}
 						});
 					});
+					device.setCapabilityValue(lookup['device'], add);
 				});
 			});
 		}).catch(function (err) {
@@ -53,7 +53,7 @@ class MyDevice extends Homey.Device {
 		this.log('Interval:', this.getSetting('interval'));
 
 		var device = this;
-		setTimeout(function () { device.timerElapsed(device); }, this.getSetting('interval') * 1000);
+		device.timerID = setTimeout(function () { device.timerElapsed(device); }, 1000);
 	}
 
 	async onSettings( oldSettingsObj, newSettingsObj, changedKeysArr ) {
@@ -63,6 +63,14 @@ class MyDevice extends Homey.Device {
 			}
 		});
 	}
+
+	async onDeleted()
+    {
+        if (this.timerID) {
+            clearTimeout(this.timerID);
+        }
+		console.log(`Deleted device ${this.getName()}`)
+    }
 }
 
 module.exports = MyDevice;

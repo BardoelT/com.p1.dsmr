@@ -1,1 +1,1 @@
-Met deze app kan de DMSRv4 slimme meter lezer van Willem Aandewiel gekoppeld worden aan de Homey. Met de energie tab en Homey Insights wordt de informatie van de slimme meter getoond. 
+Met deze app kan de DMSRv4 slimme meter lezer van Willem Aandewiel of de DMSRv5 slimmer meter lezer van Martijn Hendriks gekoppeld worden aan de Homey. Met de energie tab en Homey Insights wordt de informatie van de slimme meter getoond. 

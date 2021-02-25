@@ -1,0 +1,48 @@
+{
+  "triggers": [
+    {
+      "id": "measure_power.consumed.changed",
+      "title": {
+        "en": "Energy consumption changed",
+        "nl": "Energieverbruik is veranderd"
+      },
+      "hint": {
+        "en": "When the current energy consumption changed",
+        "nl": "Wanneer het actuele energieverbruik is veranderd"
+      },
+      "args": [],
+      "tokens": [
+        {
+          "name": "measure_power.consumed",
+          "type": "number",
+          "title": {
+            "en": "Power",
+            "nl": "Energie"
+          }
+        }
+      ]
+    },
+    {
+      "id": "measure_power.returned.changed",
+      "title": {
+        "en": "Power Returned Changed",
+        "nl": "Energie retour is veranderd"
+      },
+      "hint": {
+        "en": "When the current returned power measure is changed",
+        "nl": "Wanneer de retour energie is veranderd"
+      },
+      "args": [],
+      "tokens": [
+        {
+          "name": "measure_power.returned",
+          "type": "number",
+          "title": {
+            "en": "Power Returned",
+            "nl": "Energie retour"
+          }
+        }
+      ]
+    }
+  ]
+}
