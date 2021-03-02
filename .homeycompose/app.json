@@ -5,8 +5,8 @@
   "brandColor": "#ff00ff",
   "sdk": 2,
   "name": {
-    "nl": "P1 DSMRv4 Board Lezer",
-    "en": "P1 DSMRv4 Board Reader"
+    "nl": "P1 DSMR Board Lezer",
+    "en": "P1 DSMR Board Reader"
   },
   "description": {
     "nl": "Maak slimme meter data inzichtelijk",
@@ -19,6 +19,14 @@
   "author": {
     "name": "Thijs Bardoel",
     "email": "-"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Marco Gosselink",
+        "email": "-"
+      }
+    ]
   },
   "category": [
     "energy"

@@ -1,1 +1,1 @@
-With this app the DMSRv4 smart meter reader from Willem Aandewiel can be connected to Homey. All the smart meter information is displayed on the energy tab and Homey Insights.
+With this app the DMSRv4 smart meter reader from Willem Aandewiel or the DSMRv5 smart meter reader from Martijn Hendriks can be connected to Homey. All the smart meter information is displayed on the energy tab and Homey Insights.

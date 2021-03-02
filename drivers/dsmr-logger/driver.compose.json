@@ -22,19 +22,53 @@
   },
   "settings": [
     {
-      "id": "interval",
-      "type": "number",
-      "label": "Interval",
-      "value": 5,
-      "min": 1,
-      "max": 60,
-      "units": "seconds"
+      "type": "group",
+      "label": {
+        "en": "Settings",
+        "nl": "Instellingen"
+      },
+      "children": [
+        {
+          "id": "interval",
+          "type": "number",
+          "label": "Interval",
+          "value": 5,
+          "min": 1,
+          "max": 60,
+          "units": "seconds"
+        },
+        {
+          "id": "hostname",
+          "type": "text",
+          "label": "Hostname or IP-address",
+          "value": "DSMR-api.local"
+        }
+      ]
     },
     {
-      "id": "hostname",
-      "type": "text",
-      "label": "Hostname or IP-address",
-      "value": "DSMR-api.local"
+      "type": "group",
+      "label": {
+        "en": "Information",
+        "nl": "Informatie"
+      },
+      "children": [
+        {
+          "id": "fwversion",
+          "type": "label",
+          "label": {
+            "en": "Firmware version",
+            "nl": "Firmware versie"
+          }
+        },
+        {
+          "id": "boardtype",
+          "type": "label",
+          "label": {
+            "en": "Board type",
+            "nl": "Kaart type"
+          }
+        }
+      ]
     }
   ],
   "pair": [

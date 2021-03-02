@@ -1,0 +1,155 @@
+{
+  "id": "dsmr-logger-api-v2",
+  "name": {
+    "en": "DSMR logger API v2"
+  },
+  "class": "other",
+  "capabilities": [
+    "measure_power.consumed",
+    "measure_power.returned",
+    "measure_voltage",
+    "measure_current",
+    "meter_power.daily.consumed",
+    "meter_power.daily.returned",
+    "meter_power.consumed",
+    "meter_power.returned",
+    "meter_gas.daily",
+    "meter_gas"
+  ],
+  "capabilitiesOptions": {
+    "measure_power.consumed": {
+      "title": {
+        "en": "Power Usage",
+        "nl": "Vermogen verbruik"
+      }
+    },
+    "measure_power.returned": {
+      "title": {
+        "en": "Power Returned",
+        "nl": "Vermogen teruglevering"
+      }
+    },
+    "meter_power.daily.consumed": {
+      "title": {
+        "en": "Energy Usage (Today)",
+        "nl": "Energieverbruik (vandaag)"
+      }
+    },
+    "meter_power.daily.returned": {
+      "title": {
+        "en": "Energy Returned (Today)",
+        "nl": "Energie teruggeleverd (vandaag)"
+      }
+    },
+    "meter_power.consumed": {
+      "title": {
+        "en": "Energy (Total)",
+        "nl": "Energie (totaal)"
+      },
+      "preventInsights": true
+    },
+    "meter_power.returned": {
+      "title": {
+        "en": "Energy Returned (Total)",
+        "nl": "Energie teruggeleverd (totaal)"
+      },
+      "preventInsights": true
+    },
+    "meter_gas": {
+      "title": {
+        "en": "Gas (Total)",
+        "nl": "Gas (totaal)"
+      },
+      "preventInsights": true
+    },
+    "meter_gas.daily": {
+      "title": {
+        "en": "Gas (Today)",
+        "nl": "Gas (vandaag)"
+      }
+    }
+  },
+  "energy": {
+    "approximation": {
+      "usageConstant": 5
+    },
+    "cumulative": true
+  },
+  "images": {
+    "large": "/drivers/dsmr-logger-api-v2/assets/images/large.png",
+    "small": "/drivers/dsmr-logger-api-v2/assets/images/small.png"
+  },
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Settings",
+        "nl": "Instellingen"
+      },
+      "children": [
+        {
+          "id": "interval",
+          "type": "number",
+          "label": {
+            "en": "Interval",
+            "nl": "Interval"
+          },
+          "value": 10,
+          "min": 2,
+          "max": 60,
+          "units": {
+            "en": "seconds",
+            "nl": "seconden"
+          }
+        },
+        {
+          "id": "hostname",
+          "type": "text",
+          "label": {
+            "en": "Hostname or IP-address",
+            "nl": "Hostnaam of IP-adres"
+          },
+          "value": "dsmr-api.local"
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "label": {
+        "en": "Information",
+        "nl": "Informatie"
+      },
+      "children": [
+        {
+          "id": "fwversion",
+          "type": "label",
+          "label": {
+            "en": "Firmware version",
+            "nl": "Firmware versie"
+          }
+        },
+        {
+          "id": "boardtype",
+          "type": "label",
+          "label": {
+            "en": "Board type",
+            "nl": "Kaart type"
+          }
+        }
+      ]
+    }
+  ],
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_my_devices"
+      }
+    },
+    {
+      "id": "add_my_devices",
+      "template": "add_devices"
+    }
+  ]
+}
