@@ -3,7 +3,7 @@
 const Homey = require('homey');
 const fetch = require('node-fetch');
 
-class MyDriver extends Homey.Driver {
+class DSMRLoggerDriver extends Homey.Driver {
 
 	onPairListDevices(data, callback) {
 		fetch('http://DSMR-API.local/api/v1/dev/info').then(function (response) {
@@ -37,7 +37,7 @@ class MyDriver extends Homey.Driver {
 			callback(null, []);
 		});
 	}
-	
+
 }
 
-module.exports = MyDriver;
+module.exports = DSMRLoggerDriver;

@@ -67,16 +67,25 @@
             {
               "id": "interval",
               "type": "number",
-              "label": "Interval",
+              "label": {
+                "en": "Interval",
+                "nl": "Interval"
+              },
               "value": 5,
               "min": 1,
               "max": 60,
-              "units": "seconds"
+              "units": {
+                "en": "seconds",
+                "nl": "seconden"
+              }
             },
             {
               "id": "hostname",
               "type": "text",
-              "label": "Hostname or IP-address",
+              "label": {
+                "en": "Hostname or IP-address",
+                "nl": "Hostnaam of IP-adres"
+              },
               "value": "DSMR-api.local"
             }
           ]

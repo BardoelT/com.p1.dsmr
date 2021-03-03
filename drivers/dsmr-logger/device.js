@@ -3,7 +3,7 @@
 const Homey = require('homey');
 const fetch = require('node-fetch');
 
-class MyDevice extends Homey.Device {
+class DSMRLogger extends Homey.Device {
 
 	updateSetting(setting, value) {
 		const body_json = { "name": setting, "value": value };
@@ -53,24 +53,23 @@ class MyDevice extends Homey.Device {
 		this.log('Interval:', this.getSetting('interval'));
 
 		var device = this;
-		device.timerID = setTimeout(function () { device.timerElapsed(device); }, 1000);
+		device.timerID = setTimeout(function () { device.timerElapsed(device); }, device.getSetting('interval') * 1000);
 	}
 
-	async onSettings( oldSettingsObj, newSettingsObj, changedKeysArr ) {
+	async onSettings(oldSettingsObj, newSettingsObj, changedKeysArr) {
 		changedKeysArr.forEach(element => {
-			if(element === 'interval') {
+			if (element === 'interval') {
 				this.updateSetting("tlgrm_interval", newSettingsObj.interval);
 			}
 		});
 	}
 
-	async onDeleted()
-    {
-        if (this.timerID) {
-            clearTimeout(this.timerID);
-        }
+	async onDeleted() {
+		if (this.timerID) {
+			clearTimeout(this.timerID);
+		}
 		console.log(`Deleted device ${this.getName()}`)
-    }
+	}
 }
 
-module.exports = MyDevice;
+module.exports = DSMRLogger;
