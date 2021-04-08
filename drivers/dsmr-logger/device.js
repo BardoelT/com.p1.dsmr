@@ -14,6 +14,30 @@ class DSMRLogger extends Homey.Device {
 			});
 	}
 
+	timerInfoElapsed(device) {
+		device.timerInfoId = setTimeout(function () { device.timerInfoElapsed(device); }, 60 * 60 * 1000);
+		var hostname = device.getSetting('hostname');
+		fetch('http://' + hostname + '/api/v1/dev/info').then(function (response) {
+			response.json().then(function (json) {
+				let settings = { }
+				json.devinfo.forEach(element => {
+					if (element['name'] === 'uptime') {
+						settings.uptime = element['value'];
+					}
+					if (element['name'] === 'freeheap') {
+						settings.freeheap = element['value'] + " bytes";
+					}
+					if (element['name'] === 'fwversion') {
+						settings.fwversion = element['value'];
+					}
+				});
+				device.setSettings(settings).catch(function (err) { device.log(err); });
+			});
+		}).catch(function (err) {
+			device.log(err);
+		});
+	}
+
 	timerIntervalElapsed(device) {
 		device.timerIntervalId = setTimeout(function () { device.timerIntervalElapsed(device); }, device.getSetting('interval') * 1000);
 		var energy = {
@@ -81,7 +105,9 @@ class DSMRLogger extends Homey.Device {
 		this.log('Interval:', this.getSetting('interval'));
 
 		var device = this;
-		device.timerIntervalId = setTimeout(function () { device.timerIntervalElapsed(device); }, device.getSetting('interval') * 1000);
+		device.timerInfoElapsed(device);
+		device.timerIntervalElapsed(device);
+		// device.timerIntervalId = setTimeout(function () { device.timerIntervalElapsed(device); }, device.getSetting('interval') * 1000);
 	}
 
 	async onSettings(oldSettingsObj, newSettingsObj, changedKeysArr) {
@@ -95,6 +121,9 @@ class DSMRLogger extends Homey.Device {
 	async onDeleted() {
 		if (this.timerIntervalId) {
 			clearTimeout(this.timerIntervalId);
+		}
+		if (this.timerInfoId) {
+			clearTimeout(this.timerInfoId);
 		}
 		console.log(`Deleted device ${this.getName()}`)
 	}

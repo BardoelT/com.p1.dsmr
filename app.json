@@ -338,6 +338,18 @@
             "en": "Total power returned",
             "nl": "Elektriciteit teruggeleverd"
           }
+        },
+        "meter_gas": {
+          "title": {
+            "en": "Total gas delivered",
+            "nl": "Gas verbruikt"
+          }
+        },
+        "meter_water": {
+          "title": {
+            "en": "Total water delivered",
+            "nl": "Water verbruikt"
+          }
         }
       },
       "energy": {
@@ -350,6 +362,19 @@
         "large": "/drivers/dsmr-logger/assets/images/large.png",
         "small": "/drivers/dsmr-logger/assets/images/small.png"
       },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_my_devices"
+          }
+        },
+        {
+          "id": "add_my_devices",
+          "template": "add_devices"
+        }
+      ],
       "settings": [
         {
           "type": "group",
@@ -394,6 +419,7 @@
             {
               "id": "fwversion",
               "type": "label",
+              "value": "default",
               "label": {
                 "en": "Firmware version",
                 "nl": "Firmware versie"
@@ -402,6 +428,7 @@
             {
               "id": "boardtype",
               "type": "label",
+              "value": "default",
               "label": {
                 "en": "Board type",
                 "nl": "Bord type"
@@ -410,6 +437,7 @@
             {
               "id": "uptime",
               "type": "label",
+              "value": "-",
               "label": {
                 "en": "Uptime",
                 "nl": "Uptime"
@@ -418,25 +446,14 @@
             {
               "id": "freeheap",
               "type": "label",
+              "value": "-",
+              "units": "bytes",
               "label": {
                 "en": "Free heap",
                 "nl": "Vrije heap ruimte"
               }
             }
           ]
-        }
-      ],
-      "pair": [
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_my_devices"
-          }
-        },
-        {
-          "id": "add_my_devices",
-          "template": "add_devices"
         }
       ]
     },
@@ -697,6 +714,23 @@
         }
       ],
       "id": "p1-smartmeter"
+    },
+    {
+      "id": "test",
+      "name": {
+        "en": "test"
+      },
+      "class": "other",
+      "capabilities": [
+        "meter_gas",
+        "meter_power",
+        "measure_power",
+        "meter_water"
+      ],
+      "images": {
+        "large": "/drivers/test/assets/images/large.png",
+        "small": "/drivers/test/assets/images/small.png"
+      }
     }
   ]
 }
