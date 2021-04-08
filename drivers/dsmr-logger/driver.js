@@ -38,6 +38,14 @@ class DSMRLoggerDriver extends Homey.Driver {
 		});
 	}
 
+
+	onInit() {
+		super.onInit();
+		this.measurePowerDeliveredTrigger = new Homey.FlowCardTriggerDevice('measure_power.delivered.changed')
+			.register();
+		this.measurePowerReturnedTrigger = new Homey.FlowCardTriggerDevice('measure_power.returned.changed')
+			.register();
+	}
 }
 
 module.exports = DSMRLoggerDriver;

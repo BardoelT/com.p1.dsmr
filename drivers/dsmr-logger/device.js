@@ -14,12 +14,14 @@ class DSMRLogger extends Homey.Device {
 			});
 	}
 
-	timerElapsed(device) {
-		device.timerID = setTimeout(function () { device.timerElapsed(device); }, device.getSetting('interval') * 1000);
+	timerIntervalElapsed(device) {
+		device.timerIntervalId = setTimeout(function () { device.timerIntervalElapsed(device); }, device.getSetting('interval') * 1000);
 		var energy = {
 			"list": [
-				{ "device": "measure_power", "factor": 1000, "dsmr": ["power_delivered_l1", "power_delivered_l2", "power_delivered_l3"] },
-				{ "device": "meter_power", "factor": 1, "dsmr": ["energy_delivered_tariff1", "energy_delivered_tariff2"] },
+				{ "device": "measure_power.delivered", "factor": 1000, "dsmr": ["power_delivered_l1", "power_delivered_l2", "power_delivered_l3"] },
+				{ "device": "measure_power.returned", "factor": 1000, "dsmr": ["power_returned_l1", "power_returned_l2", "power_returned_l3"] },
+				{ "device": "meter_power.delivered", "factor": 1, "dsmr": ["energy_delivered_tariff1", "energy_delivered_tariff2"] },
+				{ "device": "meter_power.returned", "factor": 1, "dsmr": ["energy_returned_tariff1", "energy_returned_tariff2"] },
 				{ "device": "meter_gas", "factor": 1, "dsmr": ["gas_delivered"] },
 				{ "device": "meter_water", "factor": 1, "dsmr": ["water_delivered"] }
 			]
@@ -36,12 +38,38 @@ class DSMRLogger extends Homey.Device {
 							}
 						});
 					});
-					device.setCapabilityValue(lookup['device'], add);
+					device.updateProperty(lookup['device'], add);
 				});
 			});
 		}).catch(function (err) {
 			device.log(err);
 		});
+	}
+
+	updateProperty(key, value) {
+		if (this.hasCapability(key)) {
+			let oldValue = this.getCapabilityValue(key);
+			if (oldValue !== null && oldValue != value) {
+				this.setCapabilityValue(key, value);
+
+				if (key === 'measure_power.delivered') {
+					let tokens = {
+						'measure_power.delivered': value || 'n/a'
+					}
+					this.getDriver().measurePowerDeliveredTrigger.trigger(this, tokens)
+				}
+
+				if (key === 'measure_power.returned') {
+					let tokens = {
+						'measure_power.returned': value || 'n/a'
+					}
+					this.getDriver().measurePowerReturnedTrigger.trigger(this, tokens)
+				}
+
+			} else {
+				this.setCapabilityValue(key, value);
+			}
+		}
 	}
 
 	// this method is called when the Device is initialized
@@ -53,7 +81,7 @@ class DSMRLogger extends Homey.Device {
 		this.log('Interval:', this.getSetting('interval'));
 
 		var device = this;
-		device.timerID = setTimeout(function () { device.timerElapsed(device); }, device.getSetting('interval') * 1000);
+		device.timerIntervalId = setTimeout(function () { device.timerIntervalElapsed(device); }, device.getSetting('interval') * 1000);
 	}
 
 	async onSettings(oldSettingsObj, newSettingsObj, changedKeysArr) {
@@ -65,8 +93,8 @@ class DSMRLogger extends Homey.Device {
 	}
 
 	async onDeleted() {
-		if (this.timerID) {
-			clearTimeout(this.timerID);
+		if (this.timerIntervalId) {
+			clearTimeout(this.timerIntervalId);
 		}
 		console.log(`Deleted device ${this.getName()}`)
 	}
