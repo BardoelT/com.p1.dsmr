@@ -1,9 +1,9 @@
 {
   "id": "com.p1.dsmr",
   "version": "2.1.0",
-  "compatibility": ">=3.0.0",
+  "compatibility": ">=5.0.0",
   "brandColor": "#ff00ff",
-  "sdk": 2,
+  "sdk": 3,
   "name": {
     "nl": "P1 DSMR Board Lezer",
     "en": "P1 DSMR Board Reader"

@@ -42,18 +42,12 @@ class DSMRLoggerDriver extends Homey.Driver {
 	onInit() {
 		super.onInit();
 		this.triggers = [];
-		this.triggers['measure_power.delivered'] = new Homey.FlowCardTriggerDevice('measure_power.delivered.changed').register();
-		this.triggers['measure_power.returned'] = new Homey.FlowCardTriggerDevice('measure_power.returned.changed').register();
-		this.triggers['meter_power.delivered'] = new Homey.FlowCardTriggerDevice('meter_power.delivered.changed').register();
-		this.triggers['meter_power.returned'] = new Homey.FlowCardTriggerDevice('meter_power.returned.changed').register();
-		this.triggers['meter_gas'] = new Homey.FlowCardTriggerDevice('meter_gas.changed').register();
-		this.triggers['meter_water'] = new Homey.FlowCardTriggerDevice('meter_water.changed').register();
-
-		
-		// this.measureMeterDeliveredTrigger = new Homey.FlowCardTriggerDevice('meter_power.delivered.changed').register();
-		// this.measureMeterReturnedTrigger = new Homey.FlowCardTriggerDevice('meter_power.returned.changed').register();
-		// this.measureMeterGasTrigger = new Homey.FlowCardTriggerDevice('meter_gas.changed').register();
-		// this.measureMeterWaterTrigger = new Homey.FlowCardTriggerDevice('meter_water.changed').register();
+		this.triggers['measure_power.delivered'] = this.homey.flow.getDeviceTriggerCard('measure_power.delivered.changed');
+		this.triggers['measure_power.returned'] = this.homey.flow.getDeviceTriggerCard('measure_power.returned.changed');
+		this.triggers['meter_power.delivered'] = this.homey.flow.getDeviceTriggerCard('meter_power.delivered.changed');
+		this.triggers['meter_power.returned'] = this.homey.flow.getDeviceTriggerCard('meter_power.returned.changed');
+		this.triggers['meter_gas'] = this.homey.flow.getDeviceTriggerCard('meter_gas.changed');
+		this.triggers['meter_water'] = this.homey.flow.getDeviceTriggerCard('meter_water.changed');
 	}
 }
 

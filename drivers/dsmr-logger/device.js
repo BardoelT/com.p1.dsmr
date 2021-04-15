@@ -81,7 +81,7 @@ class DSMRLogger extends Homey.Device {
 			if (oldValue !== null && oldValue != value) {
 				let tokens = {};
 				tokens[key] = value;
-				let triggerCard = this.getDriver().triggers[key];
+				let triggerCard = this.driver.triggers[key];
 				if (triggerCard !== undefined) {
 					triggerCard.trigger(this, tokens);
 				}

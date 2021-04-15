@@ -18,11 +18,11 @@ class DSMRLoggerAPIv2 extends Homey.Device {
 		device.timerID = setTimeout(() => { device.timerElapsed(device); }, device.getSetting('interval') * 1000);
 		var energy = {
 			"list": [
-				{ "device": "measure_power.consumed", "factor": 1000, "dsmr": ["power_delivered_l1", "power_delivered_l2", "power_delivered_l3"] },
+				{ "device": "measure_power.delivered", "factor": 1000, "dsmr": ["power_delivered_l1", "power_delivered_l2", "power_delivered_l3"] },
 				{ "device": "measure_power.returned", "factor": 1000, "dsmr": ["power_returned_l1", "power_returned_l2", "power_returned_l3"] },
-				{ "device": "meter_power.consumed", "factor": 1, "dsmr": ["energy_delivered_tariff1", "energy_delivered_tariff2"] },
+				{ "device": "meter_power.delivered", "factor": 1, "dsmr": ["energy_delivered_tariff1", "energy_delivered_tariff2"] },
 				{ "device": "meter_power.returned", "factor": 1, "dsmr": ["energy_returned_tariff1", "energy_returned_tariff2"] },
-				{ "device": "meter_power.daily.consumed", "factor": 1, "dsmr": ["energy_delivered_tariff1", "energy_delivered_tariff2"] },
+				{ "device": "meter_power.daily.delivered", "factor": 1, "dsmr": ["energy_delivered_tariff1", "energy_delivered_tariff2"] },
 				{ "device": "meter_power.daily.returned", "factor": 1, "dsmr": ["energy_returned_tariff1", "energy_returned_tariff2"] },
 				{ "device": "meter_gas", "factor": 1, "dsmr": ["gas_delivered"] },
 				{ "device": "meter_gas.daily", "factor": 1, "dsmr": ["gas_delivered"] },
@@ -87,25 +87,15 @@ class DSMRLoggerAPIv2 extends Homey.Device {
 	_updateProperty(key, value) {
 		if (this.hasCapability(key)) {
 			let oldValue = this.getCapabilityValue(key);
+			this.setCapabilityValue(key, value);
+
 			if (oldValue !== null && oldValue != value) {
-				this.setCapabilityValue(key, value);
-
-				if (key === 'measure_power.consumed') {
-					let tokens = {
-						'measure_power.consumed': value || 'n/a'
-					}
-					this.getDriver()._measurePowerConsumedTrigger.trigger(this, tokens)
+				let tokens = {};
+				tokens[key] = value;
+				let triggerCard = this.getDriver().triggers[key];
+				if (triggerCard !== undefined) {
+					triggerCard.trigger(this, tokens);
 				}
-
-				if (key === 'measure_power.returned') {
-					let tokens = {
-						'measure_power.returned': value || 'n/a'
-					}
-					this.getDriver()._measurePowerReturnedTrigger.trigger(this, tokens)
-				}
-
-			} else {
-				this.setCapabilityValue(key, value);
 			}
 		}
 	}

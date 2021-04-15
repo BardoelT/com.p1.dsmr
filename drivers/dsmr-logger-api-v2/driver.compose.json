@@ -5,19 +5,19 @@
   },
   "class": "other",
   "capabilities": [
-    "measure_power.consumed",
+    "measure_power.delivered",
     "measure_power.returned",
     "measure_voltage",
     "measure_current",
-    "meter_power.daily.consumed",
+    "meter_power.daily.delivered",
     "meter_power.daily.returned",
-    "meter_power.consumed",
+    "meter_power.delivered",
     "meter_power.returned",
     "meter_gas.daily",
     "meter_gas"
   ],
   "capabilitiesOptions": {
-    "measure_power.consumed": {
+    "measure_power.delivered": {
       "title": {
         "en": "Power Usage",
         "nl": "Vermogen verbruik"
@@ -29,7 +29,7 @@
         "nl": "Vermogen teruglevering"
       }
     },
-    "meter_power.daily.consumed": {
+    "meter_power.daily.delivered": {
       "title": {
         "en": "Energy Usage (Today)",
         "nl": "Energieverbruik (vandaag)"
@@ -41,7 +41,7 @@
         "nl": "Energie teruggeleverd (vandaag)"
       }
     },
-    "meter_power.consumed": {
+    "meter_power.delivered": {
       "title": {
         "en": "Energy (Total)",
         "nl": "Energie (totaal)"
