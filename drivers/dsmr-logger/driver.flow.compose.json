@@ -1,0 +1,130 @@
+{
+  "triggers": [
+    {
+      "id": "measure_power.delivered.changed",
+      "title": {
+        "en": "Power usage changed",
+        "nl": "Electriciteit verbruik is veranderd"
+      },
+      "hint": {
+        "en": "When the current power usage is changed",
+        "nl": "Wanneer het actuele opgenomen vermogen is veranderd"
+      },
+      "tokens": [
+        {
+          "name": "measure_power.delivered",
+          "type": "number",
+          "title": {
+            "en": "Power",
+            "nl": "Vermogen"
+          }
+        }
+      ]
+    },
+    {
+      "id": "measure_power.returned.changed",
+      "title": {
+        "en": "Power returned changed",
+        "nl": "Elektriciteit teruglevering is veranderd"
+      },
+      "hint": {
+        "en": "When the current returned power measure is changed",
+        "nl": "Wanneer het actuele teruggeleverde vermogen is veranderd"
+      },
+      "tokens": [
+        {
+          "name": "measure_power.returned",
+          "type": "number",
+          "title": {
+            "en": "Power returned",
+            "nl": "Vermogen retour"
+          }
+        }
+      ]
+    },
+    {
+      "id": "meter_power.delivered.changed",
+      "title": {
+        "en": "Total power delivered changed",
+        "nl": "Totale opgenomen elektriciteit is veranderd"
+      },
+      "hint": {
+        "en": "When the delivered energy meter is changed",
+        "nl": "Wanneer de opgenomen energie meter is veranderd"
+      },
+      "tokens": [
+        {
+          "name": "meter_power.delivered",
+          "type": "number",
+          "title": {
+            "en": "Energy delivered",
+            "nl": "Opgenomen energie"
+          }
+        }
+      ]
+    },
+    {
+      "id": "meter_power.returned.changed",
+      "title": {
+        "en": "Total power returned changed",
+        "nl": "Totale teruggeleverde elektriciteit is veranderd"
+      },
+      "hint": {
+        "en": "When the returned energy meter is changed",
+        "nl": "Wanneer de teruggeleverde energie meter is veranderd"
+      },
+      "tokens": [
+        {
+          "name": "meter_power.returned",
+          "type": "number",
+          "title": {
+            "en": "Energy returned",
+            "nl": "Teruggeleverde energie"
+          }
+        }
+      ]
+    },
+    {
+      "id": "meter_gas.changed",
+      "title": {
+        "en": "Total gas delivered changed",
+        "nl": "Totale gas verbruik is veranderd"
+      },
+      "hint": {
+        "en": "When the gas meter is changed",
+        "nl": "Wanneer de gas meter is veranderd"
+      },
+      "tokens": [
+        {
+          "name": "meter_gas",
+          "type": "number",
+          "title": {
+            "en": "Gas delivered",
+            "nl": "Gas verbruikt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "meter_water.changed",
+      "title": {
+        "en": "Total water delivered changed",
+        "nl": "Totale water verbruik is veranderd"
+      },
+      "hint": {
+        "en": "When the water meter is changed",
+        "nl": "Wanneer de water meter is veranderd"
+      },
+      "tokens": [
+        {
+          "name": "meter_water",
+          "type": "number",
+          "title": {
+            "en": "Water delivered",
+            "nl": "Water verbruikt"
+          }
+        }
+      ]
+    }
+  ]
+}

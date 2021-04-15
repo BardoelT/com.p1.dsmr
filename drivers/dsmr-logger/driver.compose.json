@@ -5,11 +5,51 @@
   },
   "class": "other",
   "capabilities": [
+    "measure_power.delivered",
+    "meter_power.delivered",
+    "measure_power.returned",
+    "meter_power.returned",
     "meter_gas",
-    "measure_power",
-    "meter_power",
     "meter_water"
   ],
+  "capabilitiesOptions": {
+    "measure_power.delivered": {
+      "title": {
+        "en": "Power usage",
+        "nl": "Elektriciteit verbruik"
+      }
+    },
+    "measure_power.returned": {
+      "title": {
+        "en": "Power returned",
+        "nl": "Elektriciteit teruglevering"
+      }
+    },
+    "meter_power.delivered": {
+      "title": {
+        "en": "Total power delivered",
+        "nl": "Totale elektriciteit verbruikt"
+      }
+    },
+    "meter_power.returned": {
+      "title": {
+        "en": "Total power returned",
+        "nl": "Elektriciteit teruggeleverd"
+      }
+    },
+    "meter_gas": {
+      "title": {
+        "en": "Total gas delivered",
+        "nl": "Gas verbruikt"
+      }
+    },
+    "meter_water": {
+      "title": {
+        "en": "Total water delivered",
+        "nl": "Water verbruikt"
+      }
+    }
+  },
   "energy": {
     "approximation": {
       "usageConstant": 5
@@ -20,57 +60,6 @@
     "large": "/drivers/dsmr-logger/assets/images/large.png",
     "small": "/drivers/dsmr-logger/assets/images/small.png"
   },
-  "settings": [
-    {
-      "type": "group",
-      "label": {
-        "en": "Settings",
-        "nl": "Instellingen"
-      },
-      "children": [
-        {
-          "id": "interval",
-          "type": "number",
-          "label": "Interval",
-          "value": 5,
-          "min": 1,
-          "max": 60,
-          "units": "seconds"
-        },
-        {
-          "id": "hostname",
-          "type": "text",
-          "label": "Hostname or IP-address",
-          "value": "DSMR-api.local"
-        }
-      ]
-    },
-    {
-      "type": "group",
-      "label": {
-        "en": "Information",
-        "nl": "Informatie"
-      },
-      "children": [
-        {
-          "id": "fwversion",
-          "type": "label",
-          "label": {
-            "en": "Firmware version",
-            "nl": "Firmware versie"
-          }
-        },
-        {
-          "id": "boardtype",
-          "type": "label",
-          "label": {
-            "en": "Board type",
-            "nl": "Kaart type"
-          }
-        }
-      ]
-    }
-  ],
   "pair": [
     {
       "id": "list_devices",

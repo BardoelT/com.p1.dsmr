@@ -1,4 +1,7 @@
 {
+  "2.1.0": {
+  "en": "Added new device driver new hardware"
+},
   "2.0.0": {
     "en": "Added new device driver for the REST API"
   },

@@ -1,0 +1,81 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "Settings",
+      "nl": "Instellingen"
+    },
+    "children": [
+      {
+        "id": "interval",
+        "type": "number",
+        "label": {
+          "en": "Interval",
+          "nl": "Interval"
+        },
+        "value": 5,
+        "min": 1,
+        "max": 60,
+        "units": {
+          "en": "seconds",
+          "nl": "seconden"
+        }
+      },
+      {
+        "id": "hostname",
+        "type": "text",
+        "label": {
+          "en": "Hostname or IP-address",
+          "nl": "Hostnaam of IP-adres"
+        },
+        "value": "DSMR-api.local"
+      }
+    ]
+  },
+  {
+    "type": "group",
+    "label": {
+      "en": "Information",
+      "nl": "Informatie"
+    },
+    "children": [
+      {
+        "id": "fwversion",
+        "type": "label",
+        "value": "-",
+        "label": {
+          "en": "Firmware version",
+          "nl": "Firmware versie"
+        }
+      },
+      {
+        "id": "boardtype",
+        "type": "label",
+        "value": "-",
+        "label": {
+          "en": "Board type",
+          "nl": "Bord type"
+        }
+      },
+      {
+        "id": "uptime",
+        "type": "label",
+        "value": "-",
+        "label": {
+          "en": "Uptime",
+          "nl": "Uptime"
+        }
+      },
+      {
+        "id": "freeheap",
+        "type": "label",
+        "value": "-",
+        "units": "bytes",
+        "label": {
+          "en": "Free heap",
+          "nl": "Vrije heap ruimte"
+        }
+      }
+    ]
+  }
+]
