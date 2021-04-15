@@ -30,6 +30,9 @@ class DSMRLogger extends Homey.Device {
 					if (element['name'] === 'fwversion') {
 						settings.fwversion = element['value'];
 					}
+					if (element['name'] === 'telegraminterval') {
+						settings.interval = element['value'];
+					}
 				});
 				device.setSettings(settings).catch(function (err) { device.log(err); });
 			});
@@ -73,25 +76,15 @@ class DSMRLogger extends Homey.Device {
 	updateProperty(key, value) {
 		if (this.hasCapability(key)) {
 			let oldValue = this.getCapabilityValue(key);
+			this.setCapabilityValue(key, value);
+
 			if (oldValue !== null && oldValue != value) {
-				this.setCapabilityValue(key, value);
-
-				if (key === 'measure_power.delivered') {
-					let tokens = {
-						'measure_power.delivered': value || 'n/a'
-					}
-					this.getDriver().measurePowerDeliveredTrigger.trigger(this, tokens)
+				let tokens = {};
+				tokens[key] = value;
+				let triggerCard = this.getDriver().triggers[key];
+				if (triggerCard !== undefined) {
+					triggerCard.trigger(this, tokens);
 				}
-
-				if (key === 'measure_power.returned') {
-					let tokens = {
-						'measure_power.returned': value || 'n/a'
-					}
-					this.getDriver().measurePowerReturnedTrigger.trigger(this, tokens)
-				}
-
-			} else {
-				this.setCapabilityValue(key, value);
 			}
 		}
 	}
@@ -107,13 +100,14 @@ class DSMRLogger extends Homey.Device {
 		var device = this;
 		device.timerInfoElapsed(device);
 		device.timerIntervalElapsed(device);
-		// device.timerIntervalId = setTimeout(function () { device.timerIntervalElapsed(device); }, device.getSetting('interval') * 1000);
 	}
 
 	async onSettings(oldSettingsObj, newSettingsObj, changedKeysArr) {
 		changedKeysArr.forEach(element => {
 			if (element === 'interval') {
 				this.updateSetting("tlgrm_interval", newSettingsObj.interval);
+				clearTimeout(this.timerIntervalId);
+				this.timerIntervalElapsed(this);
 			}
 		});
 	}

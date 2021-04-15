@@ -28,7 +28,7 @@
     "meter_power.delivered": {
       "title": {
         "en": "Total power delivered",
-        "nl": "Elektriciteit verbruikt"
+        "nl": "Totale elektriciteit verbruikt"
       }
     },
     "meter_power.returned": {

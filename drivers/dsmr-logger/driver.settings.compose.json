@@ -42,7 +42,7 @@
       {
         "id": "fwversion",
         "type": "label",
-        "value": "default",
+        "value": "-",
         "label": {
           "en": "Firmware version",
           "nl": "Firmware versie"
@@ -51,7 +51,7 @@
       {
         "id": "boardtype",
         "type": "label",
-        "value": "default",
+        "value": "-",
         "label": {
           "en": "Board type",
           "nl": "Bord type"
