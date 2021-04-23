@@ -92,11 +92,23 @@ class DSMRLoggerAPIv2 extends Homey.Device {
 			if (oldValue !== null && oldValue != value) {
 				let tokens = {};
 				tokens[key] = value;
-				let triggerFunction = this.driver.triggerFunctions[key];
-				if (triggerFunction !== undefined) {
-					triggerFunction(this, tokens);
+				let triggerCard = this.driver.triggers[key];
+				if (triggerCard !== undefined) {
+					triggerCard.trigger(this, tokens)
+						.catch(this.error);
 				}
 			}
+		}
+	}
+
+	async _updateBoardInformation(device) {
+		let hostname = device.getSetting('hostname');
+		try {
+			const response = await fetch('http://' + hostname + '/api/v2/dev/info');
+			const json = await response.json();
+			device.setSettings({'fwversion': json.fwversion || 'n/a', 'updateboardinfo': false});
+		} catch(err) {
+			console.log(err);
 		}
 	}
 
@@ -118,6 +130,9 @@ class DSMRLoggerAPIv2 extends Homey.Device {
 		changedKeys.forEach(element => {
 			if(element === 'interval') {
 				this.updateSetting("tlgrm_interval", newSettings.interval);
+			}
+			if (element === 'updateboardinfo') {
+				this._updateBoardInformation(this);
 			}
 		});
 	}
