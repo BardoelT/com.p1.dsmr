@@ -45,8 +45,8 @@ class DSMRLoggerAPIv2 extends Homey.Device {
 							}
 						});
 					});
-					if (lookup['device'] == 'meter_power.daily.consumed') {
-						add -= device.meterDataYesterday.powerConsumed;
+					if (lookup['device'] == 'meter_power.daily.delivered') {
+						add -= device.meterDataYesterday.powerDelivered;
 					}
 					if (lookup['device'] == 'meter_power.daily.returned') {
 						add -= device.meterDataYesterday.powerReturned;
@@ -72,7 +72,7 @@ class DSMRLoggerAPIv2 extends Homey.Device {
 					if (device.meterDataYesterday.actSlot != prevSlot) {
 						let prevValues = json.data[prevSlot].values;
 						device.meterDataYesterday.actSlot = prevSlot;
-						device.meterDataYesterday.powerConsumed = prevValues[0] + prevValues[1];
+						device.meterDataYesterday.powerDelivered = prevValues[0] + prevValues[1];
 						device.meterDataYesterday.powerReturned = prevValues[2] + prevValues[3];
 						device.meterDataYesterday.gas = prevValues[4];
 						device.meterDataYesterday.date = currDate;
@@ -92,11 +92,23 @@ class DSMRLoggerAPIv2 extends Homey.Device {
 			if (oldValue !== null && oldValue != value) {
 				let tokens = {};
 				tokens[key] = value;
-				let triggerCard = this.getDriver().triggers[key];
+				let triggerCard = this.driver.triggers[key];
 				if (triggerCard !== undefined) {
-					triggerCard.trigger(this, tokens);
+					triggerCard.trigger(this, tokens)
+						.catch(this.error);
 				}
 			}
+		}
+	}
+
+	async _updateBoardInformation(device) {
+		let hostname = device.getSetting('hostname');
+		try {
+			const response = await fetch('http://' + hostname + '/api/v2/dev/info');
+			const json = await response.json();
+			device.setSettings({'fwversion': json.fwversion || 'n/a', 'updateboardinfo': false});
+		} catch(err) {
+			console.log(err);
 		}
 	}
 
@@ -109,15 +121,18 @@ class DSMRLoggerAPIv2 extends Homey.Device {
 		this.log('Interval:', this.getSetting('interval'));
 
 		var device = this;
-		this.meterDataYesterday = { date: 0, powerConsumed: 0, powerReturned: 0, gas: 0, water: 0, actSlot: -1 };
+		this.meterDataYesterday = { date: 0, powerDelivered: 0, powerReturned: 0, gas: 0, water: 0, actSlot: -1 };
 		device.timerID = setTimeout(() => { device.timerElapsed(device); }, 1000);
 	}
 
 	// eslint-disable-next-line no-unused-vars
-	async onSettings( oldSettings, newSettings, changedKeys ) {
+	async onSettings({ oldSettings, newSettings, changedKeys }) {
 		changedKeys.forEach(element => {
 			if(element === 'interval') {
 				this.updateSetting("tlgrm_interval", newSettings.interval);
+			}
+			if (element === 'updateboardinfo') {
+				this._updateBoardInformation(this);
 			}
 		});
 	}

@@ -135,6 +135,14 @@
             "en": "Board type",
             "nl": "Kaart type"
           }
+        },
+        {
+          "id": "updateboardinfo",
+          "type": "checkbox",
+          "label": {
+            "en": "Update information",
+            "nl": "Informatie bijwerken"
+          }
         }
       ]
     }

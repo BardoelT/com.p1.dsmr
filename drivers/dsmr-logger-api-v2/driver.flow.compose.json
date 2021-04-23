@@ -1,7 +1,7 @@
 {
   "triggers": [
     {
-      "id": "measure_power.consumed.changed",
+      "id": "measure_power.delivered.changed",
       "title": {
         "en": "Energy consumption changed",
         "nl": "Energieverbruik is veranderd"
@@ -13,7 +13,7 @@
       "args": [],
       "tokens": [
         {
-          "name": "measure_power.consumed",
+          "name": "measure_power.delivered",
           "type": "number",
           "title": {
             "en": "Power",
