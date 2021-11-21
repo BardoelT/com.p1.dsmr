@@ -204,7 +204,7 @@
         ]
       },
       {
-        "id": "measure_power.consumed.changed",
+        "id": "measure_power.delivered.changed.v2",
         "title": {
           "en": "Energy consumption changed",
           "nl": "Energieverbruik is veranderd"
@@ -222,7 +222,7 @@
         ],
         "tokens": [
           {
-            "name": "measure_power.consumed",
+            "name": "measure_power.delivered",
             "type": "number",
             "title": {
               "en": "Power",
@@ -232,7 +232,7 @@
         ]
       },
       {
-        "id": "measure_power.returned.changed",
+        "id": "measure_power.returned.changed.v2",
         "title": {
           "en": "Power Returned Changed",
           "nl": "Energie retour is veranderd"
@@ -585,7 +585,9 @@
         "meter_power.delivered",
         "meter_power.returned",
         "meter_gas.daily",
-        "meter_gas"
+        "meter_gas",
+        "cost_power_daily",
+        "cost_gas_daily"
       ],
       "capabilitiesOptions": {
         "measure_power.delivered": {
@@ -687,6 +689,41 @@
         {
           "type": "group",
           "label": {
+            "en": "Tariff",
+            "nl": "Tarieven"
+          },
+          "children": [
+            {
+              "id": "electic_tariff",
+              "type": "number",
+              "label": {
+                "en": "Electricity",
+                "nl": "Stroom"
+              },
+              "value": 0,
+              "units": {
+                "en": "per kWh",
+                "nl": "per kWh"
+              }
+            },
+            {
+              "id": "gas_tariff",
+              "type": "number",
+              "label": {
+                "en": "Gas",
+                "nl": "Gas"
+              },
+              "value": 0,
+              "units": {
+                "en": "per m3",
+                "nl": "per m3"
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
             "en": "Information",
             "nl": "Informatie"
           },
@@ -706,6 +743,15 @@
                 "en": "Board type",
                 "nl": "Kaart type"
               }
+            },
+            {
+              "id": "updateboardinfo",
+              "type": "checkbox",
+              "label": {
+                "en": "Update information",
+                "nl": "Informatie bijwerken"
+              },
+              "value": false
             }
           ]
         }
@@ -827,5 +873,39 @@
       ],
       "id": "p1-smartmeter"
     }
-  ]
+  ],
+  "capabilities": {
+    "cost_gas_daily": {
+      "type": "number",
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/gas.svg",
+      "title": {
+        "en": "Gas cost (Today)",
+        "nl": "Kosten gas (vandaag)"
+      },
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "€",
+        "nl": "€"
+      },
+      "value": 0
+    },
+    "cost_power_daily": {
+      "type": "number",
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/power.svg",
+      "title": {
+        "en": "Energy nett cost (Today)",
+        "nl": "Netto kosten energie (vandaag)"
+      },
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "€",
+        "nl": "€"
+      },
+      "value": 0
+    }
+  }
 }

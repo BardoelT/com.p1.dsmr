@@ -1,0 +1,16 @@
+{
+    "type": "number",
+    "uiComponent": "sensor",
+    "icon": "/assets/capabilities/gas.svg",
+    "title": {
+        "en": "Gas cost (Today)",
+        "nl": "Kosten gas (vandaag)"
+    },
+    "getable": true,
+    "setable": false,
+    "units": {
+        "en": "€",
+        "nl": "€"
+    },
+    "value": 0
+}

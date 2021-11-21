@@ -27,7 +27,9 @@ class DSMRLoggerAPIv2 extends Homey.Device {
 				{ "device": "meter_gas", "factor": 1, "dsmr": ["gas_delivered"] },
 				{ "device": "meter_gas.daily", "factor": 1, "dsmr": ["gas_delivered"] },
 				{ "device": "measure_voltage", "factor": 1, "dsmr": ["voltage_l1"] },
-				{ "device": "measure_current", "factor": 1, "dsmr": ["current_l1"] }
+				{ "device": "measure_current", "factor": 1, "dsmr": ["current_l1"] },
+				{ "device": "cost_power_daily", "factor": 1, "dsmr": [] },
+				{ "device": "cost_gas_daily", "factor": 1, "dsmr": [] }
 			]
 		};
 
@@ -53,6 +55,17 @@ class DSMRLoggerAPIv2 extends Homey.Device {
 					}
 					if (lookup['device'] == 'meter_gas.daily') {
 						add -= device.meterDataYesterday.gas;
+					}
+					if (lookup['device'] == 'cost_power_daily') {
+						add = Math.round(
+							(device.getCapabilityValue('meter_power.daily.delivered') - 
+							 device.getCapabilityValue('meter_power.daily.returned')) * 
+							 device.getSetting('electic_tariff') * 100) / 100
+					}
+					if (lookup['device'] == 'cost_gas_daily') {
+						add = Math.round(
+							device.getCapabilityValue('meter_gas.daily') * 
+							device.getSetting('gas_tariff') * 100) / 100
 					}
 					device._updateProperty(lookup['device'], add);
 				});

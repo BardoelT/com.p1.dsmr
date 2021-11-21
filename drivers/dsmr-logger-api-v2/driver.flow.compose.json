@@ -1,7 +1,7 @@
 {
   "triggers": [
     {
-      "id": "measure_power.delivered.changed",
+      "id": "measure_power.delivered.changed.v2",
       "title": {
         "en": "Energy consumption changed",
         "nl": "Energieverbruik is veranderd"
@@ -23,7 +23,7 @@
       ]
     },
     {
-      "id": "measure_power.returned.changed",
+      "id": "measure_power.returned.changed.v2",
       "title": {
         "en": "Power Returned Changed",
         "nl": "Energie retour is veranderd"

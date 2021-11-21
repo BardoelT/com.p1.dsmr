@@ -28,8 +28,8 @@ class DSMRLoggerAPIv2Driver extends Homey.Driver {
 	onInit() {
 		super.onInit();
 		this.triggers = [];
-		this.triggers['measure_power.delivered'] = this.homey.flow.getDeviceTriggerCard('measure_power.delivered.changed');
-		this.triggers['measure_power.returned'] = this.homey.flow.getDeviceTriggerCard('measure_power.returned.changed');
+		this.triggers['measure_power.delivered'] = this.homey.flow.getDeviceTriggerCard('measure_power.delivered.changed.v2');
+		this.triggers['measure_power.returned'] = this.homey.flow.getDeviceTriggerCard('measure_power.returned.changed.v2');
 	}
 }
 

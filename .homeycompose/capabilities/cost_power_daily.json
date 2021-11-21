@@ -1,0 +1,16 @@
+{
+    "type": "number",
+    "uiComponent": "sensor",
+    "icon": "/assets/capabilities/power.svg",
+    "title": {
+        "en": "Energy nett cost (Today)",
+        "nl": "Netto kosten energie (vandaag)"
+    },
+    "getable": true,
+    "setable": false,
+    "units": {
+        "en": "€",
+        "nl": "€"
+    },
+    "value": 0
+}

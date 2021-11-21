@@ -14,7 +14,9 @@
     "meter_power.delivered",
     "meter_power.returned",
     "meter_gas.daily",
-    "meter_gas"
+    "meter_gas",
+    "cost_power_daily",
+    "cost_gas_daily"
   ],
   "capabilitiesOptions": {
     "measure_power.delivered": {
@@ -116,6 +118,41 @@
     {
       "type": "group",
       "label": {
+        "en": "Tariff",
+        "nl": "Tarieven"
+      },
+      "children": [
+        {
+          "id": "electic_tariff",
+          "type": "number",
+          "label": {
+            "en": "Electricity",
+            "nl": "Stroom"
+          },
+          "value": 0,
+          "units": {
+            "en": "per kWh",
+            "nl": "per kWh"
+          }
+        },
+        {
+          "id": "gas_tariff",
+          "type": "number",
+          "label": {
+            "en": "Gas",
+            "nl": "Gas"
+          },
+          "value": 0,
+          "units": {
+            "en": "per m3",
+            "nl": "per m3"
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "label": {
         "en": "Information",
         "nl": "Informatie"
       },
@@ -142,7 +179,8 @@
           "label": {
             "en": "Update information",
             "nl": "Informatie bijwerken"
-          }
+          },
+          "value": false
         }
       ]
     }
